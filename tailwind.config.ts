@@ -9,8 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary": "#191919",
+        primary: "#191919",
         "green-fourth": "#D1F121",
+        green: "#D0FF1A",
       },
     },
   },
