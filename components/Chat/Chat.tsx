@@ -7,7 +7,7 @@ const Chat = () => {
   const { input, handleInputChange, handleSubmit } = useChatProvider();
 
   return (
-    <div className="w-full items-center flex flex-col max-h-[85vh]">
+    <div className="w-full items-center flex flex-col">
       <ScrollTo>{({ scroll }) => <Messages scroll={scroll} />}</ScrollTo>
       <ChatInput
         handleSubmit={handleSubmit}

@@ -17,7 +17,7 @@ export default function LoginButton() {
   return (
     <Button
       onClick={isConnected ? disconnect : connectWallet}
-      className="font-bold py-2 px-4"
+      className="font-Pragmatica hover:bg-primary border border-green-fourth hover:text-green-fourth uppercase py-2 px-1"
     >
       {isConnected ? "Disconnect" : "Connect"}
     </Button>
