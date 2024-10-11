@@ -19,7 +19,7 @@ class ChatMessagesService {
 Here is some relevant data to help you answer:
 ${context}
 
-Here's information about Newtro Classes:
+Here's information about Newtro Class 1:
 ${CLASE_1_TRANSCRIPT}
 
 Please use this information to provide accurate and relevant responses. You can discuss Newtro Classes and the user's data, but don't explicitly mention the data sources in your response.`;
