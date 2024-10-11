@@ -3,7 +3,7 @@ import ContentEmbed from './ContentEmbed'
 
 const EdTutorials = () => {
   return (
-    <div className='w-full text-green-fourth lg:mx-8'>
+    <div className='w-full text-green-fourth'>
         <h5 className='uppercase pragmatica-text text-xl lg:text-4xl mb-4'>Top Picks for You</h5>
         <div className='flex w-full justify-between'>
             <ContentEmbed/>

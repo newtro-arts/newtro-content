@@ -15,7 +15,7 @@ body {
 }
 
 .btn {
-  @apply w-fit bg-green-fourth rounded-lg pragmatica-text px-2 py-4 text-primary text-lg hover:bg-primary hover:text-green-fourth border border-green-fourth;
+  @apply w-fit h-fit bg-green-fourth rounded-lg pragmatica-text px-2 py-4 text-primary text-lg hover:bg-primary hover:text-green-fourth border border-green-fourth;
 }
 
 .pragmatica-text {
