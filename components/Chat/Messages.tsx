@@ -1,4 +1,6 @@
 import { Message } from "ai";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const Messages = ({ messages }: { messages: Message[] }) => {
   return (
@@ -13,7 +15,9 @@ const Messages = ({ messages }: { messages: Message[] }) => {
                 : "bg-green text-black"
             }`}
           >
-            <p className="text-sm">{message.content}</p>
+            <ReactMarkdown className="text-sm" remarkPlugins={[remarkGfm]}>
+              {message.content}
+            </ReactMarkdown>
           </div>
         ))}
       </div>
