@@ -13,6 +13,9 @@ const config: Config = {
         "green-fourth": "#D1F121",
         green: "#D0FF1A",
       },
+      fontFamily: {
+        'Pragmatica': ['pragmatica', 'sans-serif']
+      }
     },
   },
   plugins: [],
