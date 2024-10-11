@@ -3,6 +3,8 @@ import "server-only";
 import getContext from "../getContext";
 import { Address } from "viem";
 import { AI_MODEL } from "../consts";
+import { CLASE_1_TRANSCRIPT } from "../context/clase_1";
+
 export function createChatMessagesService() {
   return new ChatMessagesService();
 }
@@ -13,11 +15,14 @@ class ChatMessagesService {
   async getChatSettings(address: Address) {
     const context = await this.fetchRelevantContext(address);
 
-    const systemMessage = `You are a helpful assistant
+    const systemMessage = `You are a helpful assistant with knowledge about Newtro Classes.
 Here is some relevant data to help you answer:
 ${context}
 
-Please use this information to provide accurate and relevant responses and don't mention the data source in your response.`;
+Here's information about Newtro Class 1:
+${CLASE_1_TRANSCRIPT}
+
+Please use this information to provide accurate and relevant responses. You can discuss Newtro Classes and the user's data, but don't explicitly mention the data sources in your response.`;
 
     return {
       maxTokens: 500,
