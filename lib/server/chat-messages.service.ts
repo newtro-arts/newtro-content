@@ -1,8 +1,8 @@
-import 'server-only';
+import "server-only";
 
-import getContext from '../getContext';
-import { Address } from 'viem';
-import { AI_MODEL } from '../consts';
+import getContext from "../getContext";
+import { Address } from "viem";
+import { AI_MODEL } from "../consts";
 export function createChatMessagesService() {
   return new ChatMessagesService();
 }
@@ -10,10 +10,10 @@ export function createChatMessagesService() {
 class ChatMessagesService {
   constructor() {}
 
-  async getChatSettings(chatReferenceId: string, address: Address) {
-      const context = await this.fetchRelevantContext(address);
+  async getChatSettings(address: Address) {
+    const context = await this.fetchRelevantContext(address);
 
-      const systemMessage = `You are a helpful assistant
+    const systemMessage = `You are a helpful assistant
 Here is some relevant data to help you answer:
 ${context}
 
@@ -27,16 +27,16 @@ Please use this information to provide accurate and relevant responses and don't
     };
   }
 
-  private async fetchRelevantContext(address: Address = "0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38"): Promise<string> {
+  private async fetchRelevantContext(
+    address: Address = "0xcfBf34d385EA2d5Eb947063b67eA226dcDA3DC38"
+  ): Promise<string> {
     try {
       const context = await getContext(address);
 
       return JSON.stringify(context, null, 2);
     } catch (error) {
-      console.error('Error reading or parsing JSON files:', error);
-      return '{}';
+      console.error("Error reading or parsing JSON files:", error);
+      return "{}";
     }
   }
 }
-
-

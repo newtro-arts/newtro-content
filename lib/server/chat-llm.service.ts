@@ -1,21 +1,21 @@
-import 'server-only';
+import "server-only";
 
-import { openai } from '@ai-sdk/openai';
-import { LanguageModelV1, StreamingTextResponse, streamText } from 'ai';
-import { encodeChat } from 'gpt-tokenizer';
-import { z } from 'zod';
+import { openai } from "@ai-sdk/openai";
+import { LanguageModelV1, StreamingTextResponse, streamText } from "ai";
+import { encodeChat } from "gpt-tokenizer";
+import { z } from "zod";
 
-import { createChatMessagesService } from './chat-messages.service';
-import { Address } from 'viem';
-import trackNewMessage from '../stack/trackNewMessage';
-import { AI_MODEL } from '../consts';
+import { createChatMessagesService } from "./chat-messages.service";
+import { Address } from "viem";
+import trackNewMessage from "../stack/trackNewMessage";
+import { AI_MODEL } from "../consts";
 
 export const ChatMessagesSchema = z.object({
   messages: z.array(
     z.object({
       content: z.string(),
-      role: z.enum(['user', 'assistant']),
-    }),
+      role: z.enum(["user", "assistant"]),
+    })
   ),
 });
 
@@ -43,10 +43,10 @@ class ChatLLMService {
    * @name streamResponse
    * @description Stream a response to the user and store the messages in the database.
    */
-  async streamResponse(
-    { messages, address }: z.infer<typeof StreamResponseSchema>,
-    referenceId: string,
-  ) {
+  async streamResponse({
+    messages,
+    address,
+  }: z.infer<typeof StreamResponseSchema>) {
     // use a normal service instance using the current user RLS
     const chatMessagesService = createChatMessagesService();
 
@@ -54,14 +54,16 @@ class ChatLLMService {
     const lastMessage = messages[messages.length - 1];
 
     if (!lastMessage) {
-      throw new Error('No messages provided');
+      throw new Error("No messages provided");
     }
 
     // // make sure the user has enough credits
     // await this.assertEnoughCredits(accountId);
 
     // retrieve the chat settings
-    const settings = await chatMessagesService.getChatSettings(referenceId, address as Address);
+    const settings = await chatMessagesService.getChatSettings(
+      address as Address
+    );
     const systemMessage = settings.systemMessage;
     const maxTokens = settings.maxTokens;
 
