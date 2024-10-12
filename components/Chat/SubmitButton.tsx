@@ -1,9 +1,6 @@
-import { useChatProvider } from "@/providers/ChatProvider";
 import { AiOutlineEnter } from "react-icons/ai";
 
 const SubmitButton = () => {
-  const { input } = useChatProvider();
-  const color = input.length > 0 ? "#000000" : "#F2E8CC";
 
   return (
     <button
