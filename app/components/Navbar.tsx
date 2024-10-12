@@ -1,5 +1,4 @@
 import React from 'react'
-import ConnectButton from './ConnectButton'
 import Image from 'next/image'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaSearch } from "react-icons/fa";
