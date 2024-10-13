@@ -4,9 +4,7 @@ const getContext = async (address: string) => {
   const [tokensResponse, scoreResponse, rewardsResponse] = await Promise.all([
     fetch(`${BASE_URL}/api/zora/tokens?creatorAddress=${address}`),
     fetch(`${BASE_URL}/api/zora/score?address=${address}`),
-    fetch(
-      `${BASE_URL}/api/zora/rewards?address=0x547a2e8d97Dc99BE21E509FA93C4FA5dd76b8ED0`
-    ),
+    fetch(`${BASE_URL}/api/zora/rewards?address=${address}`),
   ]);
 
   const tokens = await tokensResponse.json();

@@ -1,7 +1,7 @@
 import SubmitButton from "./SubmitButton";
 import { Loader2 } from "lucide-react";
-import useTaggedProfile from "@/hooks/useTaggedProfile";
 import Image from "next/image";
+import { useChatProvider } from "@/providers/ChatProvider";
 
 interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -14,9 +14,16 @@ const ChatInput: React.FC<ChatInputProps> = ({
   handleInputChange,
   input,
 }) => {
-  const { handleChange, isTagging, taggedProfile } =
-    useTaggedProfile(handleInputChange);
-  console.log("taggedProfile:", taggedProfile);
+  const {
+    handleChange: handleTaggedChange,
+    isTagging,
+    taggedProfile,
+  } = useChatProvider();
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleTaggedChange(e);
+    handleInputChange(e);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {

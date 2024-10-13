@@ -6,8 +6,10 @@ import useConnectWallet from "./useConnectWallet";
 import trackNewMessage from "@/lib/stack/trackNewMessage";
 import { Address } from "viem";
 import useInitialMessages from "./useInitialMessages";
+import useTaggedProfile from "./useTaggedProfile";
 
 const useChat = () => {
+  const taggedProfile = useTaggedProfile();
   const { connectWallet } = useConnectWallet();
   const csrfToken = useCsrfToken();
   const accountId = "3664dcb4-164f-4566-8e7c-20b2c93f9951";
@@ -15,6 +17,7 @@ const useChat = () => {
   const { address } = useAccount();
   const { initialMessages } = useInitialMessages();
 
+  console.log("SWEETS taggedProfile?.taggedProfile?.address", taggedProfile);
   const {
     messages,
     input,
@@ -29,7 +32,7 @@ const useChat = () => {
     },
     body: {
       accountId,
-      address,
+      address: taggedProfile?.taggedProfile?.address || address,
     },
     initialMessages,
     onError: console.error,
@@ -65,7 +68,15 @@ const useChat = () => {
     });
   };
 
-  return { messages, input, handleInputChange, handleSubmit, append, pending };
+  return {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    append,
+    pending,
+    ...taggedProfile,
+  };
 };
 
 export default useChat;
