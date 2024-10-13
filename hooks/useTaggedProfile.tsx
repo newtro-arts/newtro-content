@@ -44,7 +44,7 @@ const useTaggedProfile = (
       } finally {
         setIsTagging(false);
       }
-    }, 300);
+    }, 200);
 
     if (isTagging && taggedText) {
       lookupProfile(taggedText);
