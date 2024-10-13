@@ -12,7 +12,20 @@ const getContext = async (address: string) => {
   const rewards = await rewardsResponse.json();
   const { response } = rewards;
 
-  const zoraTokens = tokens.tokens.map((token: any) => ({
+  interface Token {
+    event: string;
+    address: string;
+    timestamp: string;
+    metadata: {
+      user: string;
+      network: string;
+      tokenId: string;
+      collection: string;
+      transactionHash: string;
+    };
+  }
+
+  const zoraTokens = tokens.tokens.map((token: Token) => ({
     event: token.event,
     address: token.address,
     timestamp: token.timestamp,
@@ -55,9 +68,15 @@ const getContext = async (address: string) => {
   My total earnings on base are ${totalBaseRewards}
   `;
 
+  type Event = {
+    metadata?: {
+      collector?: string;
+    };
+  };
+
   const collectorAddresses = response.events
-    .filter((event: any) => event.metadata && event.metadata.collector)
-    .map((event: any) => event.metadata.collector);
+    .filter((event: Event) => event.metadata?.collector)
+    .map((event: Event) => event.metadata!.collector!);
 
   const uniqueCollectors = [...new Set(collectorAddresses)];
 
