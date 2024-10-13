@@ -12,10 +12,8 @@ const getContext = async (address: string) => {
   const tokens = await tokensResponse.json();
   const score = await scoreResponse.json();
   const rewards = await rewardsResponse.json();
-  const { totalRewards } = rewards.response;
-  console.log("SWEETS REWARDS", totalRewards);
+  const { response } = rewards;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const zoraTokens = tokens.tokens.map((token: any) => ({
     event: token.event,
     address: token.address,
@@ -26,6 +24,7 @@ const getContext = async (address: string) => {
     collection: token.metadata.collection,
     transactionHash: token.metadata.transactionHash,
   }));
+
   const zoraScore = {
     address: score.address,
     score: score.score,
@@ -33,21 +32,38 @@ const getContext = async (address: string) => {
     followers: score.profile.followers,
     following: score.profile.following,
   };
-  //   const zoraRewards = {
-  //     address: rewards.address,
-  //     totalRewards: rewards.totalRewards,
-  //     rewardsBreakdown: rewards.rewardsBreakdown.map((reward: any) => ({
-  //       rewardType: reward.rewardType,
-  //       amount: reward.amount,
-  //     })),
-  //     claimStatus: rewards.claimStatus,
-  //   }
-  console.log("SWEETS REWARDS", totalRewards);
+
+  const totalZoraRewards =
+    response.zoraCreateReferralRewards +
+    response.zoraMintReferralRewards +
+    response.zoraFirstMinterRewards +
+    response.zoraCreatorRewards;
+
+  const zoraRewards = `My createReferral earnings on zora are ${response.zoraCreateReferralRewards}
+  My mintReferral earnings on zora are ${response.zoraMintReferralRewards}
+  My firstMinter earnings on zora are ${response.zoraFirstMinterRewards}
+  My creator earnings on zora are ${response.zoraCreatorRewards}
+  My total earnings on zora are ${totalZoraRewards}
+  `;
+
+  const totalBaseRewards =
+    response.baseCreateReferralRewards +
+    response.baseMintReferralRewards +
+    response.baseFirstMinterRewards +
+    response.baseCreatorRewards;
+  const baseRewards = `My createReferral earnings on base are ${response.baseCreateReferralRewards}
+  My mintReferral earnings earning on base are ${response.baseMintReferralRewards}
+  My firstMinter earnings earning on base are ${response.baseFirstMinterRewards}
+  My creator earnings earning on base are ${response.baseCreatorRewards}
+  My total earnings on base are ${totalBaseRewards}
+  `;
 
   const context = {
     zoraTokens,
     zoraScore,
-    totalRewards: totalRewards,
+    zoraRewards,
+    baseRewards,
+    totalRewards: response.totalRewards,
   };
 
   return context;
