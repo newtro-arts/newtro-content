@@ -43,8 +43,7 @@ const getContext = async (address: string) => {
   My mintReferral earnings on zora are ${response.zoraMintReferralRewards}
   My firstMinter earnings on zora are ${response.zoraFirstMinterRewards}
   My creator earnings on zora are ${response.zoraCreatorRewards}
-  My total earnings on zora are ${totalZoraRewards}
-  `;
+  My total earnings on zora are ${totalZoraRewards}`;
 
   const totalBaseRewards =
     response.baseCreateReferralRewards +
@@ -58,12 +57,24 @@ const getContext = async (address: string) => {
   My total earnings on base are ${totalBaseRewards}
   `;
 
+  const collectorAddresses = response.events
+    .filter((event: any) => event.metadata && event.metadata.collector)
+    .map((event: any) => event.metadata.collector);
+
+  const uniqueCollectors = [...new Set(collectorAddresses)];
+
+  const collectorInfo = `You have ${uniqueCollectors.length} unique collectors.
+Their addresses are: ${uniqueCollectors.join(
+    ", "
+  )} each occurance in the list is equivalent to one token purchased. you can count the number of times an address appears in the list to see how many tokens they purchased.`;
+  console.log("SWEETS collectorInfo", collectorInfo);
   const context = {
     zoraTokens,
     zoraScore,
     zoraRewards,
     baseRewards,
     totalRewards: response.totalRewards,
+    collectorInfo,
   };
 
   return context;
