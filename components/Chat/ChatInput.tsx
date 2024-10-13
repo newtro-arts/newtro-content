@@ -1,7 +1,6 @@
 import SubmitButton from "./SubmitButton";
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
 import { useChatProvider } from "@/providers/ChatProvider";
+import TaggedAccount from "./TaggedAccount";
 
 interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -44,22 +43,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           aria-label="Chat input"
           rows={1}
         />
-        {(isTagging || taggedProfile) && (
-          <div className="mr-2">
-            {taggedProfile ? (
-              <Image
-                src={taggedProfile.avatar}
-                alt={taggedProfile.username}
-                width={24}
-                height={24}
-                className="rounded-full"
-                blurDataURL={taggedProfile.avatar}
-              />
-            ) : (
-              <Loader2 className="h-4 w-4 animate-spin text-green-fourth" />
-            )}
-          </div>
-        )}
+        {(isTagging || taggedProfile) && <TaggedAccount />}
         <SubmitButton />
       </form>
     </div>
