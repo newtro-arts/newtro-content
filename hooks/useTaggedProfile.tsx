@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { debounce } from "lodash";
 
 const useTaggedProfile = (
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 ) => {
   const [isTagging, setIsTagging] = useState(false);
   const [taggedText, setTaggedText] = useState("");
+  const [taggedProfile, setTaggedProfile] = useState<any>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleInputChange(e);
@@ -27,17 +29,29 @@ const useTaggedProfile = (
   };
 
   useEffect(() => {
-    if (isTagging && taggedText) {
-      // Here you would implement the logic to search for a profile match
-      // For now, we'll just simulate a delay
-      const timer = setTimeout(() => {
+    const lookupProfile = debounce(async (address: string) => {
+      try {
+        const response = await fetch(`/api/profile?address=${address}`);
+        if (response.ok) {
+          // Profile found, you can handle the response data here if needed
+          const data = await response.json();
+          setTaggedProfile(data?.zoraProfile);
+        } else {
+          console.log("No profile found for address:", address);
+        }
+      } catch (error) {
+        console.error("Error looking up profile:", error);
+      } finally {
         setIsTagging(false);
-      }, 1000);
-      return () => clearTimeout(timer);
+      }
+    }, 300);
+
+    if (isTagging && taggedText) {
+      lookupProfile(taggedText);
     }
   }, [isTagging, taggedText]);
 
-  return { handleChange, isTagging };
+  return { handleChange, isTagging, taggedProfile };
 };
 
 export default useTaggedProfile;
