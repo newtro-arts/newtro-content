@@ -84,7 +84,6 @@ const getContext = async (address: string) => {
 Their addresses are: ${uniqueCollectors.join(
     ", "
   )} each occurance in the list is equivalent to one token purchased. you can count the number of times an address appears in the list to see how many tokens they purchased.`;
-  console.log("SWEETS collectorInfo", collectorInfo);
   const context = {
     zoraTokens,
     zoraScore,

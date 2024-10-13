@@ -13,7 +13,6 @@ class ChatMessagesService {
   constructor() {}
 
   async getChatSettings(address: Address) {
-    console.log("SWEETS ADDRESS", address);
     const context = await this.fetchRelevantContext(address);
 
     const systemMessage = `You are a helpful assistant with knowledge about Newtro Classes.

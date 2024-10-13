@@ -5,20 +5,14 @@ const useTaggedProfile = () => {
   const [isTagging, setIsTagging] = useState(false);
   const [taggedText, setTaggedText] = useState("");
   const [taggedProfile, setTaggedProfile] = useState<any>(null);
-  console.log("SWEETS TAGGED TEXT", taggedText);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
-    console.log("SWEETS TEXT", text);
     const atIndex = text.lastIndexOf("@");
-    console.log("SWEETS atIndex", atIndex);
     if (atIndex !== -1) {
       const substring = text.slice(atIndex + 1);
-      console.log("SWEETS substring", substring);
       const spaceIndex = substring.indexOf(" ");
-      console.log("SWEETS spaceIndex", spaceIndex);
       if (spaceIndex === -1) {
-        console.log("SWEETS substring", substring);
         setIsTagging(true);
         setTaggedText(substring);
       } else {
@@ -36,9 +30,7 @@ const useTaggedProfile = () => {
       try {
         const response = await fetch(`/api/profile?address=${address}`);
         if (response.ok) {
-          // Profile found, you can handle the response data here if needed
           const data = await response.json();
-          console.log("SWEETS data", data);
           setTaggedProfile(data?.zoraProfile);
         }
       } catch (error) {

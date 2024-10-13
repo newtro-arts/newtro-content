@@ -17,7 +17,6 @@ const useChat = () => {
   const { address } = useAccount();
   const { initialMessages } = useInitialMessages();
 
-  console.log("SWEETS taggedProfile?.taggedProfile?.address", taggedProfile);
   const {
     messages,
     input,
