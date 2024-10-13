@@ -10,7 +10,7 @@ const SuggestionButton = ({ suggestion }: { suggestion: string }) => {
   return (
     <Button
       onClick={() => onSubmit(suggestion)}
-      className="flex flex-col items-start justify-start gap-1 text-black text-left border border-[#E7E7E74D] w-[277px] h-auto whitespace-normal rounded rounded-2xl shadow-md hover:shadow-lg transition-shadow text-lg"
+      className="flex flex-col text-sm text-[#E7E7E780]/50 font-light justify-center gap-1 text-left items-start border border-[#E7E7E74D] w-[277px] min-h-[75px] p-4 whitespace-normal rounded-lg shadow-md hover:shadow-lg transition-shadow"
     >
       {suggestion}
     </Button>

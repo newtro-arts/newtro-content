@@ -2,27 +2,30 @@ import { useChatProvider } from "@/providers/ChatProvider";
 import Chat from "../Chat";
 import Logo from "./Logo";
 import Suggestions from "./Suggestions";
+import Navbar from "@/app/components/Navbar";
+import Sidebar from "@/app/components/Sidebar";
 
 export default function LandingPage() {
   const { messages } = useChatProvider();
 
   return (
-    <div className="flex font-nounish flex-col h-[100vh] bg-background border border-black">
-      <main className="flex-1 flex flex-col justify-center p-4">
-        <div className="flex flex-col items-center mt-8 space-y-4">
+    <>
+      <Navbar />
+      <main className="flex w-full p-4 mt-24 gap-x-8">
+        <Sidebar />
+        <div className="bg-[#1F1F1F] w-full flex flex-col items-center lg:h-[80vh] justify-around border border-[#E7E7E780]/50 rounded-lg">
+        <div className="flex flex-col items-center justify-center mt-8 space-y-4">
           {messages.length === 0 && <Logo />}
         </div>
-      </main>
-      <Suggestions />
-
-      <footer className="p-4 space-y-2">
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col items-center space-x-2">
+          <Suggestions />
           <Chat />
-        </div>
-        <p className="text-md text-green text-center">
+          <p className="text-xs text-green-fourth text-center">
           NewtroLearnHub can make mistakes. Check important info.
         </p>
-      </footer>
-    </div>
+        </div>
+        </div>
+      </main>
+    </>
   );
 }
