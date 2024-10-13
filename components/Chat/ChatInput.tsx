@@ -1,6 +1,6 @@
 import SubmitButton from "./SubmitButton";
-import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
+import useTaggedProfile from "@/hooks/useTaggedProfile";
 
 interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -13,8 +13,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   handleInputChange,
   input,
 }) => {
-  const [isTagging, setIsTagging] = useState(false);
-  const [taggedText, setTaggedText] = useState("");
+  const { handleChange, isTagging } = useTaggedProfile(handleInputChange);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -22,37 +21,6 @@ const ChatInput: React.FC<ChatInputProps> = ({
       handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
     }
   };
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    handleInputChange(e);
-    const text = e.target.value;
-    const atIndex = text.lastIndexOf("@");
-    if (atIndex !== -1) {
-      const substring = text.slice(atIndex + 1);
-      const spaceIndex = substring.indexOf(" ");
-      if (spaceIndex === -1) {
-        setIsTagging(true);
-        setTaggedText(substring);
-      } else {
-        setIsTagging(false);
-        setTaggedText("");
-      }
-    } else {
-      setIsTagging(false);
-      setTaggedText("");
-    }
-  };
-
-  useEffect(() => {
-    if (isTagging && taggedText) {
-      // Here you would implement the logic to search for a profile match
-      // For now, we'll just simulate a delay
-      const timer = setTimeout(() => {
-        setIsTagging(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [isTagging, taggedText]);
 
   return (
     <div className="w-full max-w-[555px] bg-transparent py-3 rounded-3xl border border-gray-300 p-1.5 mb-3 shadow-lg flex items-center">
