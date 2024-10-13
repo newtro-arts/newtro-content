@@ -12,7 +12,7 @@ const trackLoginPoints = async (address: Address) => {
     account: address,
     uniqueId: address,
     metadata: {
-      domain: "https://chat.myco.wtf",
+      domain: "https://newtro-ed.vercel.app/chat",
     },
   });
 };

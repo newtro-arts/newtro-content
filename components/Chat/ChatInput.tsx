@@ -1,4 +1,6 @@
 import SubmitButton from "./SubmitButton";
+import { useChatProvider } from "@/providers/ChatProvider";
+import TaggedAccount from "./TaggedAccount";
 
 interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -11,6 +13,17 @@ const ChatInput: React.FC<ChatInputProps> = ({
   handleInputChange,
   input,
 }) => {
+  const {
+    handleChange: handleTaggedChange,
+    isTagging,
+    taggedProfile,
+  } = useChatProvider();
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleTaggedChange(e);
+    handleInputChange(e);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -23,13 +36,14 @@ const ChatInput: React.FC<ChatInputProps> = ({
       <form onSubmit={handleSubmit} className="w-full flex items-center">
         <textarea
           value={input}
-          onChange={handleInputChange}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
           placeholder="Send a message"
           className="w-full text-[#E7E7E780]/50 bg-transparent outline-none text-sm px-4 resize-none pr-12 duration-150 ease-in-out flex items-center"
           aria-label="Chat input"
           rows={1}
         />
+        {(isTagging || taggedProfile) && <TaggedAccount />}
         <SubmitButton />
       </form>
     </div>
