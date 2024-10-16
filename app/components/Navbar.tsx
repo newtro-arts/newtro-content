@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className='col-span-4 flex items-center gap-x-2'>
         <ProfileInfo/>
         </div>
-        <div className='col-span-6 flex gap-x-2 items-center justify-end'> 
+        <div className='col-span-6 flex gap-x-2 lg:ml-8 items-center justify-end'> 
             <Search/>
             <RiNotification4Line className='border border-green-fourth hover:bg-green-fourth hover:fill-black hover:cursor-pointer p-4 rounded-lg' size={50}/>
         </div>
