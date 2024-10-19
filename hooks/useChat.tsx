@@ -21,7 +21,7 @@ const useChat = () => {
 
   const initialSuggestions = useMemo(() => {
     const shuffled = [...SUGGESTIONS].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 4);
+    return shuffled.slice(0, 3);
   }, []);
 
   const [suggestions, setSuggestions] = useState(initialSuggestions);

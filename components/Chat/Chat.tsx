@@ -1,4 +1,4 @@
-import { ScrollTo } from "react-scroll-to";
+import Suggestions from "../LandingPage/Suggestions";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages";
 import { useChatProvider } from "@/providers/ChatProvider";
@@ -7,8 +7,11 @@ const Chat = () => {
   const { input, handleInputChange, handleSubmit } = useChatProvider();
 
   return (
-    <div className="w-full items-center flex flex-col">
-      <ScrollTo>{({ scroll }) => <Messages scroll={scroll} />}</ScrollTo>
+    <div className="w-full h-full flex flex-col">
+      <div className="flex-1 overflow-hidden">
+        <Messages />
+      </div>
+      <Suggestions />
       <ChatInput
         handleSubmit={handleSubmit}
         handleInputChange={handleInputChange}

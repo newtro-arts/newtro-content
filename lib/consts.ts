@@ -10,11 +10,6 @@ export const AI_MODEL = "gpt-4o-mini";
 
 // CHAT
 export const SUGGESTIONS = [
-  "What are the listening habits from Spotify and Apple?",
-  "Who's played the most?",
-  "Who's scored the highest?",
-  "How many streams did this campaign earn?",
-  "How many followers did this campaign earn?",
   "¿Cómo describirías la evolución de la web desde Web1 hasta Web3?",
   "¿Cuáles son las principales diferencias entre Web2 y Web3 en términos de propiedad y control de los datos?",
   "¿Qué papel juega la descentralización en Web3 y por qué es importante para los artistas?",

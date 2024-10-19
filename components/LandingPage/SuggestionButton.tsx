@@ -9,7 +9,7 @@ const SuggestionButton = ({ suggestion }: { suggestion: string }) => {
     <button
       key={suggestion}
       type="button"
-      className="border border-gray-700 py-1 px-3 rounded-md flex gap-1 items-center text-sm"
+      className="border border-gray-700 py-1 px-3 rounded-md flex gap-1 items-center text-xs"
       onClick={() =>
         append({
           id: uuidV4(),
