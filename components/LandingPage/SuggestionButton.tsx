@@ -1,19 +1,26 @@
 import { useChatProvider } from "@/providers/ChatProvider";
-import { Button } from "../ui/Button";
+import { ArrowUpRightIcon } from "lucide-react";
+import { v4 as uuidV4 } from "uuid";
 
 const SuggestionButton = ({ suggestion }: { suggestion: string }) => {
   const { append } = useChatProvider();
 
-  const onSubmit = async (message: string) =>
-    append({ id: "1", role: "user", content: message });
-
   return (
-    <Button
-      onClick={() => onSubmit(suggestion)}
-      className="flex flex-col text-sm text-[#E7E7E780]/50 font-light justify-center gap-1 text-left items-start border border-[#E7E7E74D] w-[277px] min-h-[75px] p-4 whitespace-normal rounded-lg shadow-md hover:shadow-lg transition-shadow"
+    <button
+      key={suggestion}
+      type="button"
+      className="border border-gray-700 py-1 px-3 rounded-md flex gap-1 items-center text-xs"
+      onClick={() =>
+        append({
+          id: uuidV4(),
+          role: "user",
+          content: suggestion,
+        })
+      }
     >
-      {suggestion}
-    </Button>
+      <p className="text-left">{suggestion}</p>
+      <ArrowUpRightIcon className="w-4 h-4" />
+    </button>
   );
 };
 
