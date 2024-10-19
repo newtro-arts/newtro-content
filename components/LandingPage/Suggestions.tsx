@@ -1,15 +1,16 @@
+import { useChatProvider } from "@/providers/ChatProvider";
 import SuggestionButton from "./SuggestionButton";
 
-const promptOne = "What did I create this week???";
-const promptTwo = "What's my Zora score???";
+const Suggestions = () => {
+  const { suggestions } = useChatProvider();
 
-const Suggestions = () => (
-  <div className="flex flex-col items-center space-y-4">
-    <div className="flex flex-col lg:flex-row items-start space-y-4 lg:space-y-0 lg:space-x-4">
-      <SuggestionButton suggestion={promptOne} />
-      <SuggestionButton suggestion={promptTwo} />
+  return (
+    <div className="max-w-3xl mx-auto w-full px-2 mt-2 flex gap-3 flex-wrap">
+      {suggestions.map((suggestion: string) => (
+        <SuggestionButton key={suggestion} suggestion={suggestion} />
+      ))}
     </div>
-  </div>
-);
+  );
+};
 
 export default Suggestions;

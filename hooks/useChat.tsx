@@ -7,6 +7,8 @@ import trackNewMessage from "@/lib/stack/trackNewMessage";
 import { Address } from "viem";
 import useInitialMessages from "./useInitialMessages";
 import useTaggedProfile from "./useTaggedProfile";
+import { useState, useMemo } from "react";
+import { SUGGESTIONS } from "@/lib/consts";
 
 const useChat = () => {
   const taggedProfile = useTaggedProfile();
@@ -16,6 +18,13 @@ const useChat = () => {
   const queryClient = useQueryClient();
   const { address } = useAccount();
   const { initialMessages } = useInitialMessages();
+
+  const initialSuggestions = useMemo(() => {
+    const shuffled = [...SUGGESTIONS].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 4);
+  }, []);
+
+  const [suggestions, setSuggestions] = useState(initialSuggestions);
 
   const {
     messages,
@@ -74,6 +83,7 @@ const useChat = () => {
     handleSubmit,
     append,
     pending,
+    suggestions,
     ...taggedProfile,
   };
 };
