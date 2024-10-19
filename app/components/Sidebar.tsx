@@ -47,8 +47,15 @@ const Sidebar = () => {
 
             {isModalOpen && (
               <div className='fixed inset-0 flex items-center justify-center bg-opacity-50 text-center'>
-                <div className='bg-primary p-8 rounded-lg text-green-fourth max-w-[400px] flex flex-col items-center gap-y-4'>
+                <div className='bg-primary p-8 pt-2 rounded-lg text-green-fourth max-w-[400px] flex flex-col items-center gap-y-4'>
+                <span
+                      className="cursor-pointer text-2xl self-end "
+                      onClick={toggleModal} 
+                    >
+                      &times;
+                    </span>
                   <h2 className='text-lg uppercase font-Pragmatica'>Support Our Mission on Base</h2>
+                  
                   <Image src="/base.png" width={50} height={50} alt='Base' className='p-2 bg-green-fourth rounded-lg' />
                   <p>Your support powers the next wave of education for artists. Donate on the Base network to keep us building bold, forward-thinking learning experiences for everyone. </p>
                   <p className='font-Pragmatica uppercase'>Choose an amount:</p>
