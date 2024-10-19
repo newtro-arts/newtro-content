@@ -45,10 +45,8 @@ const useChat = () => {
     initialMessages,
     onError: console.error,
     onFinish: async (message) => {
-      console.log("SWEETS onFinish", message);
       const response = await fetch(`/api/prompts?answer=${message.content}`);
       const data = await response.json();
-      console.log(data);
       setSuggestions(data.questions);
       void queryClient.invalidateQueries({
         queryKey: ["credits", accountId],
