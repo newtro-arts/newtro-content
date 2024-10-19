@@ -7,7 +7,7 @@ const Chat = () => {
   const { input, handleInputChange, handleSubmit } = useChatProvider();
 
   return (
-    <div className="w-full h-full flex flex-col border items-center">
+    <div className="w-full h-full flex flex-col items-center">
       <div className="flex-1 overflow-hidden">
         <Messages />
       </div>
